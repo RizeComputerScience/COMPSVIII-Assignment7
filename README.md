@@ -1,4 +1,3 @@
-# Unit 10 - Recipe Sharing CI/CD
 # Unit 10: Automated Test Suite for Recipe Sharing Application
 
 This repository contains the test files and configuration updates needed for Unit 10's CI/CD pipeline assignment.
