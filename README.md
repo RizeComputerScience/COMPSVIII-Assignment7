@@ -1,61 +1,34 @@
-# Unit 10: Automated Test Suite for Recipe Sharing Application
+# Unit 10: CI/CD Pipeline Resources for Recipe Sharing Application
 
-This repository contains the test files and configuration updates needed for Unit 10's CI/CD pipeline assignment.
+This repository contains the test files and GitHub Actions workflow needed for Unit 10's CI/CD pipeline assignment.
 
 ## What's Included
 
-### Backend Tests
+### Test Suite Files
 - `backend/tests/api.test.js` - API endpoint tests for all CRUD operations
 - Updated `backend/package.json` - Includes Jest and Supertest dependencies
-- Updated `backend/server.js` - Modified to export app for testing
-
-### Frontend Tests  
+- Updated `backend/server.js` - Modified for testing with in-memory storage and module exports
 - `frontend/src/test/App.test.jsx` - Utility function and API integration tests
 - Updated `frontend/package.json` - Includes Vitest testing dependencies
 - Updated `frontend/vite.config.js` - Configured for testing environment
 
+### GitHub Actions Workflow
+- `.github/workflows/deploy.yml` - Complete CI/CD pipeline configuration for your Recipe Sharing app
+
 ## Installation Instructions
 
 1. **Copy the test files** to your Recipe Sharing Application repository
-2. **Install backend dependencies**:
+2. **Copy the GitHub Actions workflow** to `.github/workflows/deploy.yml` in your repository
+3. **Install backend dependencies**:
    ```bash
    cd backend
    npm install
    ```
-3. **Install frontend dependencies**:
+4. **Install frontend dependencies**:
    ```bash
    cd frontend
    npm install
    ```
-4. When done, your project should have the following structure:
-
-```bash
-recipe-app/
-├── backend/
-│   ├── test/
-│   │   ├── api.test.js # New folder and file
-│   ├── database.js
-│   ├── Dockerfile
-│   ├── package.json	# Updated
-│   └── server.js		# Updated
-├── frontend/
-│   ├── src/
-│   │   ├── test/
-│   │   │   ├── App.test.jsx    # New folder and file
-│   │   │   ├── setup.js        # New folder and file
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── Dockerfile
-│   ├── index.html
-│   ├── package.json	# Updated
-│   └── Dockerfile	    # Updated
-├── docker-compose.yml
-├── cloudbuild-backend.yaml
-├── cloudbuild-frontend.yaml
-└── README.md
-```
-
 
 ## Running Tests Locally
 
@@ -77,8 +50,8 @@ npm test
 - ✅ `GET /api/recipes` - Retrieve all recipes
 - ✅ `POST /api/recipes` - Create new recipe
 - ✅ `GET /api/recipes/:id` - Get specific recipe
-- ✅ `PUT /api/recipes/:id` - Update recipe
 - ✅ `DELETE /api/recipes/:id` - Delete recipe
+- ✅ `GET /api/health` - Health check endpoint
 - ✅ Input validation and error handling
 
 ### Frontend Tests
@@ -87,9 +60,18 @@ npm test
 - ✅ API URL construction
 - ✅ Error handling for network failures
 
+## GitHub Actions Workflow
+
+The provided `deploy.yml` workflow automatically:
+1. **Runs tests** on every push to main branch
+2. **Builds Docker images** if tests pass
+3. **Deploys to Google Cloud Run** if build succeeds
+4. **Prevents deployment** if any step fails
+
 ## Important Notes
 
-- Tests are designed to work with your existing Recipe Sharing Application
-- Backend tests expect your server to have recipe CRUD endpoints
-- Frontend tests focus on utility functions rather than React components
-- All tests should pass before setting up your GitHub Actions pipeline
+- Test files are designed to work with your existing Recipe Sharing Application structure
+- Backend tests use in-memory storage instead of database for testing reliability
+- GitHub Actions workflow is pre-configured - just copy and configure your secrets
+- All tests should pass locally before setting up your CI/CD pipeline
+- The workflow automatically deploys when tests pass
